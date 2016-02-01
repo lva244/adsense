@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        
+        <script type="text/javascript" src="./socket.io/socket.io.js"></script>
+        <script src="./lib/angular/angular.js"></script>
+        <script src="./lib/jquery/dist/jquery.min.js"></script>
+        <script src="./lib/angular-route/angular-route.js"></script>
+        <script src="./lib/angular-resource/angular-resource.js"></script>
+        <script src="./lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="./js/application.js"></script>
+        <script type="text/javascript" src="./socket.io/socket.io.js"></script>
+        <script src="./main/main.module.client.js"></script>
+        <script src="./main/config/main.client.route.js"></script>
+        <script src="./main/controllers/main.client.controller.js"></script>
+        <script src="./main/services/socket.client.service.js"></script>
+        <script src="./user/user.client.module.js"></script>
+        <script src="./user/authentication.client.module.js"></script>
+        <link href="./lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./css/main.css" rel="stylesheet">
+    </head>
+    <body>   
+        <section ng-view></section>
+    </body>    
+</html>

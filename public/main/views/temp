@@ -1,0 +1,3 @@
+<div data-ng-repeat="group in groups">
+                        <li class="list-group-item">{{group.name}}</li>
+                    </div>
