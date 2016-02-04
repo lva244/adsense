@@ -54,7 +54,6 @@ angular.module('main').controller('MainController', ['$scope', '$http', 'Socket'
     })
     
     $scope.sendMessage = function() {
-        console.log(this.groupID);
         $scope.postSuccess = '';
         $scope.postError = '';
         var time = new Date(this.timeSchedule);
