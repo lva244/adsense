@@ -10,7 +10,7 @@ var config = require('./config'),
     methodOverride = require('method-override');
     passport = require('passport');
     
-module.exports = function(db){
+module.exports = function(){
     var app = express();
     var server = http.createServer(app);
     var io = socketio.listen(server);
