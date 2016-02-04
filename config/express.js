@@ -4,7 +4,6 @@ var config = require('./config'),
     express = require('express'),
     morgan = require('morgan'),
     compress = require('compression'),
-    bodyParser = require('body-parser'),
     session = require('express-session'),
     flash = require('connect-flash'),
     methodOverride = require('method-override');
@@ -22,11 +21,7 @@ module.exports = function(){
 	{
 		app.use(compress);
 	}
-	
-	app.use(bodyParser.urlencoded({
-		extended: true
-	}));
-	app.use(bodyParser.json());
+
 	app.use(methodOverride());
     
     app.use(session({
