@@ -7,6 +7,7 @@ module.exports = function(io, socket) {
         console.log(new Date());
         var id="";
         var date = new Date(message.year, message.month, message.date, message.hour, message.minute, 0);
+        console.log(date);
         var job = schedule.scheduleJob(date, function(){
             FB.api(
               '/me/feed',
