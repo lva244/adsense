@@ -59,11 +59,11 @@ angular.module('main').controller('MainController', ['$scope', '$http', 'Socket'
         var time = new Date(this.timeSchedule);
         var message = {
             text: this.messageText,
-            year: time.getFullYear(),
-            month: time.getMonth(),
-            date: time.getDate(),
-            hour: time.getHours(),
-            minute: time.getMinutes()
+            year: time.getUTCFullYear(),
+            month: time.getUTCMonth(),
+            date: time.getUTCDate(),
+            hour: time.getUTCHours(),
+            minute: time.getUTCMinutes()
         };
         
         if(this.postMe || this.postMeSchedule)
