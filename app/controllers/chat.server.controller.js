@@ -4,9 +4,10 @@ var FB = require('fb');
 module.exports = function(io, socket) {
     
     socket.on('PostMeSchedule', function(message){
-        console.log(new Date());
+        console.log(new Date().getTimezoneOffset());
         var id="";
         var date = new Date(message.year, message.month, message.date, message.hour, message.minute, 0);
+        date.setUTCHours(9);
         console.log(date);
         var job = schedule.scheduleJob(date, function(){
             FB.api(
