@@ -7,8 +7,7 @@ module.exports = function(io, socket) {
         console.log("system time: "+ new Date());
         var id="";
         var date = new Date(message.year, message.month, message.date, message.hour, message.minute, 0);
-        console.log("Default time: "+ date);
-        date.setUTCHours(9);
+        console.log("hour time: "+ date.getHours() + "UTC: "+date.getUTCHours());
         console.log("Change time: " +date);
         var job = schedule.scheduleJob(date, function(){
             FB.api(
