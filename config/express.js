@@ -6,7 +6,6 @@ var config = require('./config'),
     compress = require('compression'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
-    MongoStore = require('connect-mongo')(session),
     flash = require('connect-flash'),
     methodOverride = require('method-override');
     passport = require('passport');
@@ -30,15 +29,10 @@ module.exports = function(db){
 	app.use(bodyParser.json());
 	app.use(methodOverride());
     
-    var mongoStore = new MongoStore({
-        db: db.connection.db
-    });
-    
     app.use(session({
         saveUninitialized: true,
         resave: true,
-        secret: config.sessionSecret,
-        store: mongoStore
+        secret: config.sessionSecret
     }));
     
     app.use(flash());
@@ -49,7 +43,7 @@ module.exports = function(db){
 	app.set('view engine', 'ejs');
 	
     require('../app/routes/index.server.route.js')(app);
-    require('./socketio')(server, io, mongoStore);
+    require('./socketio')(server, io);
     
     app.use(express.static('./public'));
     
