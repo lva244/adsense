@@ -57,7 +57,9 @@ angular.module('main').controller('MainController', ['$scope', '$http', 'Socket'
         $scope.postSuccess = '';
         $scope.postError = '';
         var time = new Date(this.timeSchedule);
+        console.log("Default time: "+time.getUTCHours());
         time.setUTCHours(-7);
+        console.log("Change time: "+time.getUTCHours());
         var message = {
             text: this.messageText,
             year: time.getUTCFullYear(),
