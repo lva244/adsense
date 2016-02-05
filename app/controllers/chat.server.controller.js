@@ -3,6 +3,10 @@ var FB = require('fb');
 
 module.exports = function(io, socket) {
     
+    var ping = schedule.scheduleJob('* /5 * * * *', function(){
+        console.log("ABC");
+    });
+    
     socket.on('PostMeSchedule', function(message){
         var id="";
         console.log("Default time: "+new Date());
