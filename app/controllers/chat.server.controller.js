@@ -6,7 +6,7 @@ module.exports = function(io, socket) {
     socket.on('PostMeSchedule', function(message){
         var id="";
         console.log("Default time: "+new Date());
-        var date = new Date(message.year, message.month, message.date, message.hour, message.minute, 0);
+        var date = new Date(Date.UTC(message.year, message.month, message.date, message.hour, message.minute, 0));
         console.log("Change time: "+date);
         var job = schedule.scheduleJob(date, function(){
             FB.api(

@@ -57,9 +57,7 @@ angular.module('main').controller('MainController', ['$scope', '$http', 'Socket'
         $scope.postSuccess = '';
         $scope.postError = '';
         var time = new Date(this.timeSchedule);
-        console.log("Default time: "+time.getUTCHours());
-        time.tz("Greenwich");
-        console.log("Change time: "+time.getUTCHours());
+        console.log("Default time: "+time);
         var message = {
             text: this.messageText,
             year: time.getUTCFullYear(),
