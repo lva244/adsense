@@ -58,14 +58,14 @@ angular.module('main').controller('MainController', ['$scope', '$http', 'Socket'
         $scope.postError = '';
         var time = new Date(this.timeSchedule);
         console.log("Default time: "+time.getUTCHours());
-        time.setUTCHours(8);
-        console.log("Change time: "+time.getUTCHours());
+        time.setUTCHours(2);
+        console.log("Change time: "+time.getHours());
         var message = {
             text: this.messageText,
             year: time.getUTCFullYear(),
             month: time.getUTCMonth(),
             date: time.getUTCDate(),
-            hour: time.getUTCHours(),
+            hour: time.getHours(),
             minute: time.getUTCMinutes()
         };
         
