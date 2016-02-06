@@ -1,4 +1,5 @@
-var FB = require('fb');
+var schedule = require('node-schedule'),
+    FB = require('fb');
 
 exports.render = function(req, res){
     if(req.session.lastVisit){
@@ -14,6 +15,14 @@ exports.render = function(req, res){
 };
 
 exports.verifyAccessToken = function(req, res){
+    var rule = new schedule.RecurrenceRule();
+    rule.dayOfWeek = new schedule.Range(0, 6);
+    rule.hour = new schedule.Range(0, 23);
+    
+    var j = schedule.scheduleJob(rule, function(){
+    console.log('Today is recognized by Rebecca Black!');
+    });
+
     var accessToken = req.body.accessToken;
     FB.setAccessToken(accessToken);
     var message = "";
