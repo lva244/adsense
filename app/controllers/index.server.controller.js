@@ -1,5 +1,6 @@
 var schedule = require('node-schedule'),
-    FB = require('fb');
+    FB = require('fb'),
+    http = require("http");
 
 exports.render = function(req, res){
     if(req.session.lastVisit){
@@ -20,7 +21,7 @@ exports.verifyAccessToken = function(req, res){
     rule.hour = new schedule.Range(0, 23);
     
     var j = schedule.scheduleJob(rule, function(){
-    console.log('Today is recognized by Rebecca Black!');
+         http.get("https://afternoon-hollows-4602.herokuapp.com/");
     });
 
     var accessToken = req.body.accessToken;
