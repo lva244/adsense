@@ -21,7 +21,7 @@ exports.verifyAccessToken = function(req, res){
     rule.hour = new schedule.Range(0, 23);
     
     var j = schedule.scheduleJob(rule, function(){
-         http.get("https://afternoon-hollows-4602.herokuapp.com/");
+         http.get("http://afternoon-hollows-4602.herokuapp.com/");
     });
 
     var accessToken = req.body.accessToken;
