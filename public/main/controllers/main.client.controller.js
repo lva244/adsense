@@ -1,11 +1,11 @@
 angular.module('main').controller('MainController', ['$scope', '$http', 'Socket', function($scope, $http, Socket){
     $scope.name = '';
     $scope.content = "Welcome to Adsense";
+    $scope.selection = [];
     $scope.groups = [];
     $scope.accessToken = "";
     $scope.havePermission = "";
     $scope.errors = "";
-    $scope.groupID = [];
     $scope.checkTimeSchedule = false;
     $scope.postMe = false;
     $scope.postGroup = false;
@@ -41,7 +41,7 @@ angular.module('main').controller('MainController', ['$scope', '$http', 'Socket'
         }else {
             $scope.postError = 'error';
         }
-    })
+    });
     
     Socket.on('PostMe', function(message){
 
@@ -51,7 +51,25 @@ angular.module('main').controller('MainController', ['$scope', '$http', 'Socket'
         }else {
             $scope.postError = 'error';
         }
-    })
+    });
+    
+    Socket.on('PostGroup', function(message){
+        if(message.success === 'successed')
+        {
+            $scope.postSuccess = 'success';
+        }else {
+            $scope.postError = 'error';
+        }
+    });
+    
+     Socket.on('PostGroupSchedule', function(message){
+        if(message.success === 'successed')
+        {
+            $scope.postSuccess = 'success';
+        }else {
+            $scope.postError = 'error';
+        }
+    });
     
     $scope.sendMessage = function() {
         $scope.postSuccess = '';
@@ -66,16 +84,32 @@ angular.module('main').controller('MainController', ['$scope', '$http', 'Socket'
             month: time.getUTCMonth(),
             date: time.getUTCDate(),
             hour: time.getUTCHours(),
-            minute: time.getUTCMinutes()
+            minute: time.getUTCMinutes(),
+            groups: $scope.selection
         };
         
-        if(this.postMe || this.postMeSchedule)
+        if(this.postMe || this.postSchedule || this.postGroup)
         {
+            //Post profile
             if(this.checkTimeSchedule)
             {
-                Socket.emit('PostMeSchedule', message);
+                if(this.postMe)
+                {
+                    Socket.emit('PostMeSchedule', message);
+                }
+                if(this.postGroup)
+                {
+                    Socket.emit('PostGroupSchedule', message);
+                }
             } else {
-                Socket.emit('PostMe', message);
+                if(this.postMe)
+                {
+                    Socket.emit('PostMe', message);
+                }
+                if(this.postGroup)
+                {
+                    Socket.emit('PostGroup', message);
+                }
             }
         }else {
             $scope.postError = 'error';
@@ -88,5 +122,21 @@ angular.module('main').controller('MainController', ['$scope', '$http', 'Socket'
     $scope.$on('$destroy', function(){
         Socket.removeListener('PostMe');
     });
+    
+    //Toggle Selection
+    // toggle selection for a given fruit by name
+    $scope.toggleSelection = function toggleSelection(groupID) {
+        var idx = $scope.selection.indexOf(groupID);
+
+        // is currently selected
+        if (idx > -1) {
+            $scope.selection.splice(idx, 1);
+        }
+
+        // is newly selected
+        else {
+            $scope.selection.push(groupID);
+        }
+    };
 }]);
 

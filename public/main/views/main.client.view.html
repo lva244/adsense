@@ -55,7 +55,7 @@
                 <div class="caret" style="float: right; margin-top: 9px;"></div>
                 </button>
                 <ul id="grouplist" class="list-group collapse">
-                    <li data-ng-repeat="group in groups" id="{{group.id}}" class="list-group-item"><input class="checkbox-inline" type="checkbox" value="{{group.id}}" data-ng-model="groupID">{{group.name}}</li>                    
+                    <li data-ng-repeat="group in groups" class="list-group-item"><input class="checkbox-inline" type="checkbox" value="{{group.id}}" ng-checked="selection.indexOf(group.id) > -1" ng-click="toggleSelection(group.id)">{{group.name}}</li>                    
                 </ul>
                 <!--<button class="btn btn-success btn-block text-left" data-toggle="collapse" data-target="#pagelist">Page
                 <div class="caret" style="float: right; margin-top: 9px;"></div>

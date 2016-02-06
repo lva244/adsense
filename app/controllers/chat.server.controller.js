@@ -53,4 +53,61 @@ module.exports = function(io, socket) {
             ); 
     });
     
+     socket.on('PostGroup', function(message){
+        var id="";
+        var groupsID = message.groups;
+        for(var group in groupsID)
+        {
+            FB.api(
+              '/'+groupsID[group]+'/feed',
+              'POST',
+              {"message": message.text},
+              function(response) {
+                  if(!response.error)
+                  {
+                      id = {
+                          id: response,
+                          success: "successed"
+                      };          
+                      console.log(id);  
+                  }
+                  else {
+                      id = response.error;
+                  }
+                  console.log(response);
+                  io.emit('PostGroup', id);
+              }
+            ); 
+        }
+    });
+    
+     socket.on('PostGroupSchedule', function(message){
+        var id="";
+        var groupsID = message.groups;
+        var date = new Date(Date.UTC(message.year, message.month, message.date, message.hour, message.minute, 0));
+        for(var group in groupsID)
+        {
+            var job = schedule.scheduleJob(date, function(){
+                FB.api(
+                '/'+groupsID[group]+'/feed',
+                'POST',
+                {"message": message.text},
+                function(response) {
+                    if(!response.error)
+                    {
+                        id = {
+                            id: response,
+                            success: "successed"
+                        };      
+                        console.log(id);
+                    }
+                    else {
+                        id = response.error;
+                    }
+                    io.emit('PostGroupSchedule', id);
+                }
+                );
+            });  
+        }
+    });
 };
