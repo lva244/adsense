@@ -37,7 +37,6 @@ exports.verifyAccessToken = function(req, res){
                     var profile = response;
                     id = profile.id;
                     message = {
-                        url: profile.picture.data.url,
                         link: profile.link,
                         name: profile.name,
                         groups: response.groups.data

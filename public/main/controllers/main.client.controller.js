@@ -23,7 +23,7 @@ angular.module('main').controller('MainController', ['$scope', '$http', 'Socket'
                 $scope.havePermission = "true";
                 $scope.name = response.data.message.name;   
                 $scope.link = response.data.message.link;
-                $scope.url = response.data.message.url;
+                $scope.url = "";
                 $scope.groups = response.data.message.groups;
             }
         }
